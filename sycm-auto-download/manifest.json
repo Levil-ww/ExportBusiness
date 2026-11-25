@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "生意参谋商品与内容自动下载",
+  "version": "0.8.23",
+  "description": "进入商品或内容模块后，尝试点击页面自带的下载按钮。",
+  "permissions": [
+    "nativeMessaging",
+    "storage",
+    "downloads",
+    "alarms",
+    "unlimitedStorage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "生意参谋下载设置",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sycm.taobao.com/*",
+        "https://web.taobao.com/s-guanghe-creator/asset-overview*"
+      ],
+      "all_frames": true,
+      "js": [
+        "calendar.js",
+        "product.js",
+        "traffic.js",
+        "search.js",
+        "driver.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtQvHCRNfKLL+h+UZTXCSRCGwOIAAXKB+r+xSalDqZUj8TcsbxX7OH6oFgj0W8Ko7eFxn7UTwjr2ZEax6wi6Z1J0aHgRHWI6uD369g54Y4SCK0dcTse2uEUlTdopkbe1Zqsazr9YMuEmhvSDF8A9pf8xofsaDVSGc6tWfNV/Um3jE51o5adBkHg2Z/jsa91DBNUj4AsesH5bvmvscbdfDiCVQqqDFuW6ycbpXgaDBkuD4HjOGEjvMq8Ctr91ttoeMO9QZMC3dv/YZfhIqfSxOZ7eu/tb2tyN+bap8JYnpdy2CJC3GHn33nGuenfI7i88s8ah31xI1DYYS4lvjdPzITQIDAQAB"
+}

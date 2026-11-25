@@ -1,0 +1,11 @@
+const assert = require('node:assert/strict');
+const { sycmFocusEndDate } = require('./calendar');
+const doc = { activeElement: null };
+const rect = { left: 0, right: 300, top: 100 };
+const start = { value: '2026-11-22', getAttribute: () => null, getBoundingClientRect: () => ({ left: 0, right: 100, bottom: 90 }) };
+let clicks = 0;
+const end = { getAttribute: () => null, getBoundingClientRect: () => ({ left: 150, right: 250, bottom: 90 }), click: () => { clicks++; }, focus: () => { doc.activeElement = end; } };
+doc.querySelectorAll = () => [start, end];
+assert.equal(sycmFocusEndDate(doc, { getBoundingClientRect: () => rect }, '2026-11-22', () => true), true);
+assert.equal(clicks, 0, '不应先触发可能关闭弹层的程序化点击');
+console.log('结束日期焦点验证通过');

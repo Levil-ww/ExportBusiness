@@ -1,0 +1,16 @@
+const assert = require('node:assert/strict');
+const { sycmSchedule } = require('./schedule');
+const schedule = date => sycmSchedule(new Date(date + 'T07:00:00Z'));
+assert.deepEqual(schedule('2026-11-19').dailyDates, ['2026-11-16', '2026-11-17', '2026-11-18']);
+assert.deepEqual(schedule('2026-11-30').dailyDates, ['2026-11-26', '2026-11-27', '2026-11-28', '2026-11-29']);
+assert.deepEqual(schedule('2026-11-25').dailyDates, ['2026-11-23', '2026-11-24']);
+assert.deepEqual(schedule('2026-11-24').dailyDates, ['2026-11-23']);
+assert.deepEqual(schedule('2026-11-28').dailyDates, ['2026-11-26', '2026-11-27']);
+assert.deepEqual(schedule('2026-12-02').dailyDates, ['2026-11-30', '2026-12-01']);
+assert.deepEqual(schedule('2026-11-26').content, { start: '2026-11-23', end: '2026-11-25' });
+assert.deepEqual(schedule('2026-11-30').content, { start: '2026-11-26', end: '2026-11-29' });
+assert.deepEqual(schedule('2026-12-07').content, { start: '2026-12-03', end: '2026-12-06' });
+assert.deepEqual(schedule('2027-01-04').content, { start: '2026-12-31', end: '2027-01-03' });
+for (const date of ['2026-11-24', '2026-11-25', '2026-11-27', '2026-11-28', '2026-11-29']) assert.equal(schedule(date).content, null);
+assert.deepEqual(schedule('2026-11-30').search, { start: '2026-11-23', end: '2026-11-29' });
+console.log('日期规则验证通过');
