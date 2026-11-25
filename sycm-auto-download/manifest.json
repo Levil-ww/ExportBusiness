@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "生意参谋商品与内容自动下载",
-  "version": "0.8.23",
+  "version": "0.8.24",
   "description": "进入商品或内容模块后，尝试点击页面自带的下载按钮。",
   "permissions": [
     "nativeMessaging",

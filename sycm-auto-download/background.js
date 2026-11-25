@@ -94,7 +94,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       if (!stages.some(stage => data[stage + 'RootPath'])) throw new Error('请先至少选择一个下载目录');
       for (const stage of stages) if (!data[stage + 'RootPath']) schedule[stage] = null;
       const first = stages.find(stage => schedule[stage]);
-      if (!first) throw new Error('已选择的下载项目今天没有任务；搜索词分析在周一，光合数据在周一和周四下载');
+      if (!first) throw new Error('已选择的下载项目今天没有任务；搜索词分析和光合数据在周一和周四下载');
       const candidates = stages.flatMap(stage => !schedule[stage] ? [] :
         (stage === 'product' || stage === 'traffic' ? schedule.dailyDates.map(date => ({ stage, range: { start: date, end: date } })) : [{ stage, range: schedule[stage] }]));
       const checked = await chrome.runtime.sendNativeMessage(HOST, { action: 'check_existing', jobs: candidates.map(job => ({ stage: job.stage, root: data[job.stage + 'RootPath'], start: job.range.start, end: job.range.end })) });

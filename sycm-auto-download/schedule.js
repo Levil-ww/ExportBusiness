@@ -14,7 +14,7 @@ function sycmSchedule(now = new Date()) {
     traffic: daily[0],
     productDays: daily.map(range => ({ ...range })),
     trafficDays: daily.map(range => ({ ...range })),
-    search: weekday === 'Mon' ? { start: day(-7), end: day(-1) } : null,
+    search: weekday === 'Mon' || weekday === 'Thu' ? { start: day(-7), end: day(-1) } : null,
     content: weekday === 'Thu' ? { start: day(-3), end: day(-1) } :
       weekday === 'Mon' ? { start: day(-4), end: day(-1) } : null
   };
